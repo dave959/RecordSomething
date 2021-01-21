@@ -1,11 +1,18 @@
 规划模块继承cyber::Component类。需重写Init()和Proc()方法。
 
 1、Init()方法
+配置planning的入口（默认OnLanePlanning）-->初始化Init() -->订阅、创建话题
+
 
 ```c++
 bool PlanningComponent::Init() {
   injector_ = std::make_shared<DependencyInjector>();
-// 通过FLAGS_use_navigation_mode决定启用哪个planner
+  /*
+   * planning_base_是Planningbase抽象类的实例，Planningbase有两个子类，
+   * OnLanePlanning和NaviPlanning。
+   * 通过FLAGS_use_navigation_mode决定启用哪个planning类
+   * 默认情况下FLAGS_use_navigation_mode == false，启用OnLanePlanning
+   */
   if (FLAGS_use_navigation_mode) {
     planning_base_ = std::make_unique<NaviPlanning>(injector_);
   } else {
@@ -15,6 +22,7 @@ bool PlanningComponent::Init() {
   //....
     
   // PlanningBase类的Init()方法
+  // 实际调用OnLanePlanning::Init()，具体查看2_OnLanePlanning.md
   planning_base_->Init(config_);
     
   /*
@@ -53,6 +61,7 @@ bool PlanningComponent::Init() {
 ```
 
 2、Proc()方法
+检查并处理可能的重路由请求 --> 处理融合输入数据 --> 生成轨迹planning_base_->RunOnce() --> 发布轨迹
 
 ```c++
 /*

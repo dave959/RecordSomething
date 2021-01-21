@@ -1,5 +1,3 @@
-Plan()是定义在PlanningBase类中的虚函数，需要具体的规划器子类来重写。
-
 ```c++
 Status OnLanePlanning::Plan(
     const double current_time_stamp,
