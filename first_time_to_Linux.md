@@ -70,3 +70,23 @@ sudo add-apt-repository 'deb https://typora.io/linux ./'
 sudo apt-get update
 sudo apt-get install typora
 ```
+
+# 三、异常
+
+## 1、Ubuntu更新错误“等待unattended-upgr退出”
+1）停止自动更新程序。
+```sudo dpkg-reconfigure -plow unattended-upgrades```  
+在第一个提示下，选择不下载并安装更新。重新启动。
+
+2）确保正确安装了处于不干净状态的所有软件包。
+```sudo dpkg --configure -a```  
+
+3）获取系统up-top-date。
+```sudo apt update && sudo apt -f install && sudo apt full-upgrade```  
+
+4）清除障碍后，重新打开自动更新程序。
+```sudo dpkg-reconfigure -plow unattended-upgrades```  
+再次选择软件包unattended-upgrades
+
+## 2、改变git默认编辑器为vscode
+```git config --global core.editor Code```
