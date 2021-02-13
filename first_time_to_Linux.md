@@ -89,4 +89,4 @@ sudo apt-get install typora
 再次选择软件包unattended-upgrades
 
 ## 2、改变git默认编辑器为vscode
-```git config --global core.editor Code```
+```git config --global core.editor "code -w"```
