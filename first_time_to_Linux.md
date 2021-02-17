@@ -30,6 +30,11 @@ tar -xvf 你的文件.tar.xz
 其实不行 tar里面没有征对xz格式的参数比如 z是针对 gzip，j是针对 bzip2。
 创建tar.xz文件：只要先 tar cvf xxx.tar xxx/ 这样创建xxx.tar文件先，然后使用 xz -z xxx.tar 来将 xxx.tar压缩成为 xxx.tar.xz
 
+### 3）创建和删除软链接
+创建
+```ln -s /mnt/hgfs/Documents /home/dave/Desktop/Documents```  
+删除
+```rm -rf /home/dave/Desktop/Documents```
 
 # 二、建议安装
 
